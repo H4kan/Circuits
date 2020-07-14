@@ -9,7 +9,10 @@ function Line(props) {
         y1={props.begin.posX} 
         x2={props.end.posY} 
         y2={props.end.posX} 
-        style={{stroke: "rgb(255,0,0)", strokeWidth:2}} />
+        style={{
+            stroke: "rgb(255,0,0)", 
+            strokeWidth:2,
+            visibility: props.visible ? "visible" : "hidden"}} />
     );
 }
 

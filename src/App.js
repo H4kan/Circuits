@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import Playground from './Playground';
 import LineList from './LineList';
-
+import addLineListener from './lineBehaviour/addLineListener';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lines: [[{posX: 0, posY: 0}, {posX: 0, posY: 0}],
-      [{posX: 0, posY: 0}, {posX: 0, posY: 0}],
-      [{posX: 0, posY: 0}, {posX: 0, posY: 0}],
-      [{posX: 0, posY: 0}, {posX: 0, posY: 0}]
-    ],
+      lines: [],
       playgroundNodes: [],
-      linesBegin: [{id: "d0", linesBegin: [0,1]}, {id: "d1", linesBegin: [2,3]}],
-      linesEnd: [{id: "d1", linesEnd: [0]}, {id: "d2", linesEnd: [1,2]}, {id: "d0", linesEnd: [3]}]
+      linesVisible: [],
+      linesBegin: [],
+      linesEnd: [],
+      currentLineId: -1
     }
   }
+
   updateLineBegin = ({posX, posY}, id) => {
     if (!(this.state.lines[id][0].posX === posX
       && this.state.lines[id][0].posY === posY)) {
@@ -37,6 +36,19 @@ class App extends Component {
   }
   }
 
+  setLineVisible = (id) => {
+    this.setState(prevState => ({
+      linesVisible: prevState.linesVisible.map((el,ind) => ind === id ? true : el) 
+    }));
+  }
+
+  unsetLineVisible = (id) => {
+    this.setState(prevState => ({
+      linesVisible: prevState.linesVisible.map((el,ind) => ind === id ? false : el) 
+    }));
+  }
+
+
   addPlaygroundNode = (el) => {
     this.setState(prevState => ({
       playgroundNodes: prevState.playgroundNodes.concat([el]),
@@ -45,37 +57,20 @@ class App extends Component {
     }));
   }
 
-  addLineBegin = (componentId, lineId) => {
-
-  }
-
+  
   componentDidMount() {
-    window.addEventListener("keydown", ev => {
-        if (ev.keyCode === 67) {
-            // create new line
-            // line = [{posX, posY}, {posX, posY}]
-            console.log("dodaje linie", this.state.playgroundNodes);
-            const lineHandler = [{posX: 0, posY: 0}, 
-              {posX: 0, posY: 0}];
-              this.setState({
-                lines: this.state.lines.concat([lineHandler])
-              });
-              this.state.playgroundNodes.forEach(element => {
-                element.el.addEventListener("click", () => {
-                  console.log("click");
-                })
-              });
-        };
-      });
+    addLineListener(this);
   }
 
   render() {
     return (
       <div className="App">
-        <Playground lines={[this.state.linesBegin, this.state.linesEnd]} 
+        <Playground lines={[this.state.linesBegin, this.state.linesEnd]}
+        linesVisible={this.state.linesVisible}
         add={this.addPlaygroundNode} 
         updateLine={[this.updateLineBegin, this.updateLineEnd]}/>
-        <LineList lines={this.state.lines}/>
+        <LineList lines={this.state.lines}
+                linesVisible={this.state.linesVisible}/>
       </div>
     );
   }

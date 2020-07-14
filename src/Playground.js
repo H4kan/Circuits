@@ -39,6 +39,7 @@ class Playground extends Component {
             <div className="playground">
                 {this.state.diodesIds.map(id => 
                     <Diode lines={this.props.lines}
+                    linesVisible={this.props.linesVisible}
                     add={this.props.add} id={id} 
                     updateLine={this.props.updateLine} key={id}/>)}
             </div>
