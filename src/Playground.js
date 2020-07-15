@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import Diode from './Diode';
+import Diode from './components/Diode';
 
 
 

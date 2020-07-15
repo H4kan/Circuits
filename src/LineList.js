@@ -12,7 +12,8 @@ class LineList extends Component {
             width={document.documentElement.clientWidth}>
                 {this.props.lines.map((el, key) => 
                 <Line begin={el[0]} end={el[1]} 
-                visible={this.props.linesVisible[key]} key={key}/>)}
+                visible={this.props.linesVisible[key]} key={key} id={"l" + key}
+                addLine={this.props.addLine}/>)}
             </svg>
         );
     }

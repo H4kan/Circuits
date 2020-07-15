@@ -18,3 +18,13 @@ div.diode.medium {
 svg {
   z-index: -1;
 }
+line {
+  stroke: rgb(255,0,0); 
+  stroke-width: 4;
+  transition: .1s;
+  cursor: pointer;
+}
+
+line:hover {
+  stroke-width: 10;
+}

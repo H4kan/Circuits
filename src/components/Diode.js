@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import moveWithMouse from './moveWithMouse';
+import moveWithMouse from '../moveWithMouse';
 
 class Diode extends Component {
     constructor(props) {

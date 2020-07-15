@@ -4,6 +4,8 @@ import createNewLine from './createNewLine';
 
 import {addLineBegin, addLineEnd} from './addLinePoint';
 
+import { setLineVisible } from './switchLineVisible';
+
 const addLineListener = (componentThis) => {
 
     window.addEventListener("keydown", ev => {
@@ -20,7 +22,7 @@ const addLineListener = (componentThis) => {
                 } else {
                   addLineEnd(ev.target.id, componentThis.state.currentLineId, componentThis);
                   // console.log("dismount click");
-                  componentThis.setLineVisible(componentThis.state.currentLineId);
+                  setLineVisible(componentThis.state.currentLineId, componentThis);
                   componentThis.state.playgroundNodes.forEach(element => {
                     element.el.removeEventListener("click", setupLineHandler, false);
                   })
