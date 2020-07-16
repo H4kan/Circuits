@@ -15,6 +15,18 @@ div.diode.medium {
   height: 30px;
 }
 
+div.powercell {
+  background-color: green;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  cursor: pointer;
+}
+
+div.powercell.medium {
+  width: 30px;
+  height: 60px;
+}
+
 svg {
   z-index: -1;
 }

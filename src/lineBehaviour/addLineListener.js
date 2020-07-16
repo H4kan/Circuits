@@ -5,6 +5,7 @@ import createNewLine from './createNewLine';
 import {addLineBegin, addLineEnd} from './addLinePoint';
 
 import { setLineVisible } from './switchLineVisible';
+import removeLine from './removeLine';
 
 const addLineListener = (componentThis) => {
 
@@ -17,12 +18,18 @@ const addLineListener = (componentThis) => {
               const setupLineHandler = (ev) => {
                 howManyClicked++;
                 if (howManyClicked < 2) {
-                  addLineBegin(ev.target.id, componentThis.state.currentLineId, componentThis);
+                  addLineBegin(ev.target.id, componentThis.currentLineId, componentThis);
+                  componentThis.lastClickedId = ev.target.id;
                 //  console.log("click" , howManyClicked);
                 } else {
-                  addLineEnd(ev.target.id, componentThis.state.currentLineId, componentThis);
+                  if (componentThis.lastClickedId === ev.target.id) {
+                    removeLine(componentThis.currentLineId, componentThis);
+                    console.log("same component chosen twice")
+                  } else {
+                  addLineEnd(ev.target.id, componentThis.currentLineId, componentThis);
                   // console.log("dismount click");
-                  setLineVisible(componentThis.state.currentLineId, componentThis);
+                  setLineVisible(componentThis.currentLineId, componentThis);
+                  }
                   componentThis.state.playgroundNodes.forEach(element => {
                     element.el.removeEventListener("click", setupLineHandler, false);
                   })

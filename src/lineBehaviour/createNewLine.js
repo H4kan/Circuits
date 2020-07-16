@@ -6,9 +6,9 @@ const createNewLine = (componentThis) => {
       {posX: 0, posY: 0}];
       componentThis.setState(prevState => ({
         lines: prevState.lines.concat([lineHandler]),
-        currentLineId: prevState.currentLineId + 1,
         linesVisible: prevState.linesVisible.concat([false])
       }));
+      componentThis.currentLineId = componentThis.currentLineId + 1;
   }
 
 export default createNewLine;

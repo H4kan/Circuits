@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
-import Diode from './components/Diode';
-
+import Diode from './nodes/Diode';
+import Powercell from './nodes/Powercell';
 
 
 
@@ -9,7 +9,8 @@ class Playground extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            diodesIds: ["d0", "d1", "d2"]        
+            diodesIds: ["d0", "d1", "d2"],
+            powercellIds: ["p0", "p1", "p2"]        
         }
     }
 
@@ -42,6 +43,12 @@ class Playground extends Component {
                     linesVisible={this.props.linesVisible}
                     add={this.props.add} id={id} 
                     updateLine={this.props.updateLine} key={id}/>)}
+                {this.state.powercellIds.map(id => 
+                    <Powercell lines={this.props.lines}
+                    linesVisible={this.props.linesVisible}
+                    add={this.props.add} id={id} 
+                    updateLine={this.props.updateLine} key={id}/>)
+                }
             </div>
         );
     }
